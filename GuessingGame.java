@@ -42,19 +42,6 @@ public class GuessingGame implements Game {
         s.close();
         root=(LinkedBinaryTreeNode<String>) loadHelper(lines.iterator());
         return root;
-        // {
-        // if(line.length()>1){
-
-        // }
-        // else{
-        // System.out.println("Issue parsing file on line "+x+" : line not long
-        // enough");
-        // playable=false;
-        // return null;
-        // }
-        // }
-        // s.close();
-        // return null;
     }
 
     private BinaryTreeNode<String> loadHelper(Iterator<String> lines) {
@@ -101,8 +88,9 @@ public class GuessingGame implements Game {
 
     @Override
     public void play() {
-        // TODO Auto-generated method stub
-
+        Scanner s=new Scanner(System.in);
+        
+        s.close();
     }
 
     public static void main(String[] args) {
