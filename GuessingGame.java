@@ -1,6 +1,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -79,7 +80,23 @@ public class GuessingGame implements Game {
 
     @Override
     public void saveTree(String filename) {
-        // TODO Auto-generated method stub
+        try {
+            FileWriter tmp=new FileWriter(filename);
+            String toFile="";
+            ArrayList<LinkedBinaryTreeNode<String>> nodes=new ArrayList<LinkedBinaryTreeNode<String>>();
+            root.traversePreorder(cheese -> {nodes.add((LinkedBinaryTreeNode<String>)cheese);});
+            int x=0;
+            while(x<nodes.size()-1){
+                toFile=toFile+nodes.get(x)+"\n";
+                x++;
+            }
+            toFile=toFile+nodes.get(x);
+            tmp.write(toFile);
+            tmp.close();
+        } catch (IOException e) {
+            o("Something went wrong with saving the tree.");
+        }
+
 
     }
 
@@ -90,7 +107,9 @@ public class GuessingGame implements Game {
 
     @Override
     public void play() {
-        // Scanner s=new Scanner(System.in);
+        if(!playable){
+            return;
+        }
         while (true) {
             o("Shall we play a game? (y/n)");
             Boolean b=YN(s);
@@ -157,9 +176,10 @@ public class GuessingGame implements Game {
                     tmp.setRight(current);
                 }
                 root=(LinkedBinaryTreeNode<String>) current.getRoot();
-                root.traversePreorder(data -> {
-                    System.out.println(data);
-                });
+                // root.traversePreorder(data -> {
+                //     System.out.println(data);
+                // });
+                saveTree(filename);
 
             }
 
