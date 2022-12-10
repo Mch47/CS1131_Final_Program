@@ -11,8 +11,10 @@ public class GuessingGame implements Game {
 
     boolean playable = true;
     LinkedBinaryTreeNode<String> root;
+    String filename;
 
     public GuessingGame(String filename) {
+        this.filename=filename;
     }
 
     /**
@@ -105,10 +107,56 @@ public class GuessingGame implements Game {
                     else{
                         current=(LinkedBinaryTreeNode<String>) current.getLeft();
                     }
+                    if(current==null){
+                        o("Something went wrong! There may be an issue with the tree structure.");
+                        return;
+                    }
                 }
                 else{
                     o("Please only enter y or n.");
                 }
+            }
+            o("Are you thinking of : "+current.data+" ? (y/n)");
+            Boolean b=YN(s);
+            while(b==null){
+                o("Please only enter y or n.");
+                b=YN(s);
+            }
+            if(b){
+                o("I win! \n\n\n");
+            }
+            else{
+                o("You win!\nWhat are you thinking of? (anything or \"exit\")");
+                String in=s.nextLine();
+                if(in.toLowerCase().equals("exit")){
+                    o("\n\n\n");
+                    continue;
+                }
+                o("What question separates : "+current.data+" from : "+in+" ?");
+                String qin=s.nextLine();
+                Question<String> tmp=new Question<String>(qin);
+                o("Is "+in+" correct when the answer to \""+qin+"\" is yes? (y/n)");
+                b=YN(s);
+                while(b==null){
+                    o("Please only enter y or n.");
+                    b=YN(s);
+                }
+                if(current.getParent().getLeft()==current){
+                    current.getParent().setLeft(tmp);
+                }
+                else{
+                    current.getParent().setRight(tmp);
+                }
+                if(b){
+                    tmp.setLeft(current);
+                    tmp.setRight(new Guess<String>(in));
+                }
+                else{
+                    tmp.setLeft(new Guess<String>(in));
+                    tmp.setRight(current);
+                }
+
+
             }
             
 
