@@ -180,6 +180,7 @@ public class GuessingGame implements Game {
                 //     System.out.println(data);
                 // });
                 saveTree(filename);
+                o("\n\n\n");
 
             }
 

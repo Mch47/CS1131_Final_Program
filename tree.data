@@ -1,1 +1,67 @@
+Q:is it a milk product?
+Q:is it a vegetable? 
+Q:is it a fruit?
+Q:is it meat?
+Q:is it often found as a fine powder?
+Q:does it have a shell?
+Q:is it scary?
+Q:is it a peninsula?
+Q:does it exist?
+G:Wyoming
+Q:is it consumable?
+Q:is it heavy?
+G:CS1131
+Q:can you climb it?
+G:4 inch tungsten cube
+G:tree
 G:bread
+G:Michigan
+Q:is it useful?
+G:ohio
+Q:is it a big bright flaming ball of fire that you can see in the sky for half the day?
+Q:is it heavy?
+G:souls
+Q:does it help generate electricity?
+G:black hole
+G:uranium
+G:the sun
+G:egg
+Q:is it used as a main ingredient in bread?
+Q:do you want to find it in your food?
+G:sand
+G:sugar
+G:flour
+Q:is it often found in nugget form?
+Q:does it come from a pig?
+Q:does it come from the sea?
+G:steak
+G:fish
+G:pork
+G:chicken
+Q:is it round?
+G:Strawberry
+Q:is it red?
+Q:is it orange?
+G:blueberry
+G:orange
+G:apple
+Q:is it green?
+Q:is it Idaho's favorite vegetable?
+Q:is it orange?
+G:corn
+G:carrot
+G:potato
+Q:is it round?
+G:green beans
+G:peas
+Q:does it go on top of pizza?
+Q:is it often sold frozen in stores?
+Q:is it fermented?
+Q:is it often eaten on birthdays?
+Q:is it a liquid even when it is refrigerated?
+G:butter
+G:milk
+G:cake
+G:yogurt
+G:ice cream
+G:cheese
