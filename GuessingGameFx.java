@@ -24,7 +24,7 @@ import javafx.stage.Stage;
  * @author Mark McArdle
  * CS1131 L02
  * 
- * This is the most unoptimized code that I have ever written. I do not expect it to run well.
+ * This is the most unoptimized code that I have ever written
  */
 public class GuessingGameFx extends Application {
 
