@@ -15,8 +15,8 @@ public class GuessingGame implements Game {
     static Scanner s = new Scanner(System.in);
 
     public GuessingGame(String filename) {
-        this.filename=filename;
-        root=(LinkedBinaryTreeNode<String>) loadTree(filename);
+        this.filename = filename;
+        root = (LinkedBinaryTreeNode<String>) loadTree(filename);
     }
 
     /**
@@ -44,7 +44,7 @@ public class GuessingGame implements Game {
             lines.add(s.nextLine());
         }
         s.close();
-        root=(LinkedBinaryTreeNode<String>) loadHelper(lines.iterator());
+        root = (LinkedBinaryTreeNode<String>) loadHelper(lines.iterator());
         return root;
     }
 
@@ -52,21 +52,19 @@ public class GuessingGame implements Game {
         if (!lines.hasNext()) {
             return null;
         }
-        if(!playable){
-            return null; //don't want to add anything to a list that is incorrect to avoid errors
+        if (!playable) {
+            return null; // don't want to add anything to a list that is incorrect to avoid errors
         }
-        LinkedBinaryTreeNode<String> node=null;
+        LinkedBinaryTreeNode<String> node = null;
         String line = lines.next();
         if (line.length() > 2) {
-            if(line.substring(0, 2).toLowerCase().equals("q:")){
-                node=new Question<String>(line.substring(2));
+            if (line.substring(0, 2).toLowerCase().equals("q:")) {
+                node = new Question<String>(line.substring(2));
                 node.setLeft(loadHelper(lines));
                 node.setRight(loadHelper(lines));
-            }
-            else if(line.substring(0,2).toLowerCase().equals("g:")){
-                node=new Guess<String>(line.substring(2));
-            }
-            else{
+            } else if (line.substring(0, 2).toLowerCase().equals("g:")) {
+                node = new Guess<String>(line.substring(2));
+            } else {
                 System.out.println("Issue parsing file for the line : " + line + " : could not find \"q:\" or \"g:\"");
                 playable = false;
                 return null;
@@ -92,94 +90,96 @@ public class GuessingGame implements Game {
 
     @Override
     public void play() {
-        //Scanner s=new Scanner(System.in);
-        while(true){
+        // Scanner s=new Scanner(System.in);
+        while (true) {
             o("Shall we play a game? (y/n)");
-            if(YN(s)!=true){
+            Boolean b=YN(s);
+            if (b==null) {
+                continue;
+            }
+            if(!b){
                 break;
             }
-            System.out.println(root.toString());
-            LinkedBinaryTreeNode<String> current=root;
-            while(!current.isLeaf()){
+            LinkedBinaryTreeNode<String> current = root;
+            while (!current.isLeaf()) {
                 o(current.data);
-                Boolean b=YN(s);
-                if(b!=null){
-                    if(b){
-                        current=(LinkedBinaryTreeNode<String>) current.getRight();
+                b = YN(s);
+                if (b != null) {
+                    if (b) {
+                        current = (LinkedBinaryTreeNode<String>) current.getRight();
+                    } else {
+                        current = (LinkedBinaryTreeNode<String>) current.getLeft();
                     }
-                    else{
-                        current=(LinkedBinaryTreeNode<String>) current.getLeft();
-                    }
-                    if(current==null){
+                    if (current == null) {
                         o("Something went wrong! There may be an issue with the tree structure.");
                         return;
                     }
-                }
-                else{
+                } else {
                     o("Please only enter y or n.");
                 }
             }
-            o("Are you thinking of : "+current.data+" ? (y/n)");
-            Boolean b=YN(s);
-            while(b==null){
+            o("Are you thinking of : " + current.data + " ? (y/n)");
+            b = YN(s);
+            while (b == null) {
                 o("Please only enter y or n.");
-                b=YN(s);
+                b = YN(s);
             }
-            if(b){
+            if (b) {
                 o("I win! \n\n\n");
-            }
-            else{
+            } else {
                 o("You win!\nWhat are you thinking of? (anything or \"exit\")");
-                String in=s.nextLine();
-                if(in.toLowerCase().equals("exit")){
+                String in = s.nextLine();
+                if (in.toLowerCase().equals("exit")) {
                     o("\n\n\n");
                     continue;
                 }
-                o("What question separates : "+current.data+" from : "+in+" ?");
-                String qin=s.nextLine();
-                Question<String> tmp=new Question<String>(qin);
-                o("Is "+in+" correct when the answer to \""+qin+"\" is yes? (y/n)");
-                b=YN(s);
-                while(b==null){
+                o("What question separates : " + current.data + " from : " + in + " ?");
+                String qin = s.nextLine();
+                Question<String> tmp = new Question<String>(qin);
+                o("Is " + in + " correct when the answer to \"" + qin + "\" is yes? (y/n)");
+                b = YN(s);
+                while (b == null) {
                     o("Please only enter y or n.");
-                    b=YN(s);
+                    b = YN(s);
                 }
-                if(current.getParent().getLeft()==current){
-                    current.getParent().setLeft(tmp);
+                if (current.getParent() != null) {
+                    if (current.getParent().getLeft() == current) {
+                        current.getParent().setLeft(tmp);
+                    } else {
+                        current.getParent().setRight(tmp);
+                    }
                 }
-                else{
-                    current.getParent().setRight(tmp);
-                }
-                if(b){
+                if (b) {
                     tmp.setLeft(current);
                     tmp.setRight(new Guess<String>(in));
-                }
-                else{
+                } else {
                     tmp.setLeft(new Guess<String>(in));
                     tmp.setRight(current);
                 }
-
+                root=(LinkedBinaryTreeNode<String>) current.getRoot();
+                root.traversePreorder(data -> {
+                    System.out.println(data);
+                });
 
             }
-            
 
         }
         s.close();
     }
 
-    private static Boolean YN(Scanner s){
-        String in=s.nextLine();
-        if(in.toLowerCase().equals("y")){
+    private static Boolean YN(Scanner s) {
+        String in = s.nextLine();
+        if (in.toLowerCase().equals("y")) {
             return true;
         }
-        if(in.toLowerCase().equals("n")){
+        if (in.toLowerCase().equals("n")) {
             return false;
         }
         return null;
     }
 
-    private static void o(String o){
-        System.out.println(o); //I am tired of writing System.out.println();
+    private static void o(String o) {
+        System.out.println(o); // I am tired of writing System.out.println();
     }
 
     public static void main(String[] args) {
