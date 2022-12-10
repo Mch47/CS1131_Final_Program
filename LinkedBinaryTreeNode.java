@@ -3,8 +3,8 @@ import java.util.Collections;
 
 
 /**
+ * lab group : Mark McArdle, Cade Haas, Jeremiah Niedzielski, Owen Colburn
  * @author Mark McArdle
- * CS 1131 L02
  */
 public class LinkedBinaryTreeNode<T> implements BinaryTreeNode<T> {
 

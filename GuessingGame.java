@@ -1,13 +1,16 @@
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Scanner;
 
+/**
+ * lab group : Mark McArdle, Cade Haas, Jeremiah Niedzielski, Owen Colburn
+ * @author Mark McArdle
+ * CS1131 L02
+ */
 public class GuessingGame implements Game {
 
     boolean playable = true;
@@ -96,8 +99,6 @@ public class GuessingGame implements Game {
         } catch (IOException e) {
             o("Something went wrong with saving the tree.");
         }
-
-
     }
 
     @Override
