@@ -12,9 +12,11 @@ public class GuessingGame implements Game {
     boolean playable = true;
     LinkedBinaryTreeNode<String> root;
     String filename;
+    static Scanner s = new Scanner(System.in);
 
     public GuessingGame(String filename) {
         this.filename=filename;
+        root=(LinkedBinaryTreeNode<String>) loadTree(filename);
     }
 
     /**
@@ -90,12 +92,13 @@ public class GuessingGame implements Game {
 
     @Override
     public void play() {
-        Scanner s=new Scanner(System.in);
+        //Scanner s=new Scanner(System.in);
         while(true){
             o("Shall we play a game? (y/n)");
             if(YN(s)!=true){
                 break;
             }
+            System.out.println(root.toString());
             LinkedBinaryTreeNode<String> current=root;
             while(!current.isLeaf()){
                 o(current.data);
@@ -184,10 +187,8 @@ public class GuessingGame implements Game {
         if (args.length > 0) {
             game = new GuessingGame(args[0]);
         } else {
-            Scanner s = new Scanner(System.in);
             System.out.println("Please enter the filename of the tree that you want to use.");
             game = new GuessingGame(s.nextLine());
-            s.close();
         }
         game.play();
     }
