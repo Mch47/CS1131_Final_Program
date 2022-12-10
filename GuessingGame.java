@@ -71,7 +71,12 @@ public class GuessingGame implements Game {
                 node.setRight(loadHelper(lines));
             }
             else if(line.substring(0,2).toLowerCase().equals("g:")){
-                node=new 
+                node=new Guess<String>(line.substring(2));
+            }
+            else{
+                System.out.println("Issue parsing file for the line : " + line + " : could not find \"q:\" or \"g:\"");
+                playable = false;
+                return null;
             }
         } else {
             System.out.println("Issue parsing file for the line : " + line + " : line not long enough");
