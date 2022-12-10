@@ -97,8 +97,20 @@ public class GuessingGame implements Game {
             LinkedBinaryTreeNode<String> current=root;
             while(!current.isLeaf()){
                 o(current.data);
-                YN(s);
+                Boolean b=YN(s);
+                if(b!=null){
+                    if(b){
+                        current=(LinkedBinaryTreeNode<String>) current.getRight();
+                    }
+                    else{
+                        current=(LinkedBinaryTreeNode<String>) current.getLeft();
+                    }
+                }
+                else{
+                    o("Please only enter y or n.");
+                }
             }
+            
 
         }
         s.close();
