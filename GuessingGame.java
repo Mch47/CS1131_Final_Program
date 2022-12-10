@@ -10,6 +10,7 @@ import java.util.Scanner;
 public class GuessingGame implements Game {
 
     boolean playable = true;
+    LinkedBinaryTreeNode<String> root;
 
     public GuessingGame(String filename) {
     }
@@ -38,8 +39,9 @@ public class GuessingGame implements Game {
         while (s.hasNextLine()) {
             lines.add(s.nextLine());
         }
-
-        return loadHelper(lines.iterator());
+        s.close();
+        root=(LinkedBinaryTreeNode<String>) loadHelper(lines.iterator());
+        return root;
         // {
         // if(line.length()>1){
 
@@ -94,8 +96,7 @@ public class GuessingGame implements Game {
 
     @Override
     public BinaryTreeNode<String> getRoot() {
-        // TODO Auto-generated method stub
-        return null;
+        return root;
     }
 
     @Override
