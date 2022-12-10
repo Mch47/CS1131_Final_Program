@@ -89,8 +89,30 @@ public class GuessingGame implements Game {
     @Override
     public void play() {
         Scanner s=new Scanner(System.in);
-        o("Shall we play a game? (y/n)");
+        while(true){
+            o("Shall we play a game? (y/n)");
+            if(YN(s)!=true){
+                break;
+            }
+            LinkedBinaryTreeNode<String> current=root;
+            while(!current.isLeaf()){
+                o(current.data);
+                YN(s);
+            }
+
+        }
         s.close();
+    }
+
+    private static Boolean YN(Scanner s){
+        String in=s.nextLine();
+        if(in.toLowerCase().equals("y")){
+            return true;
+        }
+        if(in.toLowerCase().equals("n")){
+            return false;
+        }
+        return null;
     }
 
     private static void o(String o){
