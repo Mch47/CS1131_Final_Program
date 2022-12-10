@@ -23,6 +23,21 @@ public class GuessingGame implements Game {
         root = (LinkedBinaryTreeNode<String>) loadTree(filename);
     }
 
+    private static Boolean YN(Scanner s) {
+        String in = s.nextLine();
+        if (in.toLowerCase().equals("y")) {
+            return true;
+        }
+        if (in.toLowerCase().equals("n")) {
+            return false;
+        }
+        return null;
+    }
+
+    private static void o(String o) {
+        System.out.println(o); // I am tired of writing System.out.println();
+    }
+
     /**
      * Loads a BinaryTree file that has been saved as a preorder traversal.
      * Interior nodes are prefixed by "Q:".
@@ -187,21 +202,6 @@ public class GuessingGame implements Game {
 
         }
         s.close();
-    }
-
-    private static Boolean YN(Scanner s) {
-        String in = s.nextLine();
-        if (in.toLowerCase().equals("y")) {
-            return true;
-        }
-        if (in.toLowerCase().equals("n")) {
-            return false;
-        }
-        return null;
-    }
-
-    private static void o(String o) {
-        System.out.println(o); // I am tired of writing System.out.println();
     }
 
     public static void main(String[] args) {
