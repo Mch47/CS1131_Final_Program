@@ -89,8 +89,12 @@ public class GuessingGame implements Game {
     @Override
     public void play() {
         Scanner s=new Scanner(System.in);
-        
+        o("Shall we play a game? (y/n)");
         s.close();
+    }
+
+    private static void o(String o){
+        System.out.println(o); //I am tired of writing System.out.println();
     }
 
     public static void main(String[] args) {
