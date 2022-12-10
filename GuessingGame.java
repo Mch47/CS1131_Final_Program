@@ -56,14 +56,22 @@ public class GuessingGame implements Game {
     }
 
     private BinaryTreeNode<String> loadHelper(Iterator<String> lines) {
-        LinkedBinaryTreeNode<String> node=null;
         if (!lines.hasNext()) {
             return null;
         }
+        if(!playable){
+            return null; //don't want to add anything to a list that is incorrect to avoid errors
+        }
+        LinkedBinaryTreeNode<String> node=null;
         String line = lines.next();
-        if (line.length() > 1) {
+        if (line.length() > 2) {
             if(line.substring(0, 2).toLowerCase().equals("q:")){
-
+                node=new Question<String>(line.substring(2));
+                node.setLeft(loadHelper(lines));
+                node.setRight(loadHelper(lines));
+            }
+            else if(line.substring(0,2).toLowerCase().equals("g:")){
+                node=new 
             }
         } else {
             System.out.println("Issue parsing file for the line : " + line + " : line not long enough");
